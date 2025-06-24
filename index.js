@@ -1,4 +1,7 @@
 import express from 'express'
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 
@@ -28,4 +31,11 @@ app.post('/calc-sum', function (req, res) {
     res.status(200).json(sum)
 })
 
-app.listen(3000, () => console.log('Сервер запущен'))
+try {
+    await mongoose.connect(process.env.MONGO_URL)
+    console.log('Успешно подключено')
+
+    app.listen(3000, () => console.log('Сервер запущен'))
+} catch (err) {
+    console.log('ОШИБКА')
+}
