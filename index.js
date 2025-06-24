@@ -1,5 +1,5 @@
 import express from 'express'
-
+import mongoose from 'mongoose'
 const app = express()
 app.use(express.json())
 
@@ -24,4 +24,9 @@ app.post('/calc-sum', function (req, res) {
  const sum = req.body.num1 + req.body.num2  
     res.status(200).json(sum)
 })
-app.listen(3000, () => console.log('сервер запущен'))
+try {
+await mongoose.connect(process.env.MONGO_URL)
+    app.listen(3000, () => console.log('сервер запущен'))
+} catch (err) {
+    console.log('ошибка')
+}
