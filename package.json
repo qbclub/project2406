@@ -1,7 +1,10 @@
 {
   "private": true,
   "type": "module",
-  "script":{
+  "script": {
     "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
