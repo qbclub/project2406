@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
+import { UserService } from './services/user-service.js'
+
 const app = express()
 
 app.use(express.json())
@@ -29,6 +31,16 @@ app.get('/', function (request, response) {
 app.post('/calc-sum', function (req, res) {
     const sum = req.body.num1 + req.body.num2
     res.status(200).json(sum)
+})
+
+app.post('/create-user', async function (req, res) {
+    await UserService.create(req.body)
+    res.sendStatus(200)
+})
+
+app.get('/get-all-users', async function (req, res) {
+    const users = await UserService.getAllUsers()
+    res.status(200).json(users)
 })
 
 try {
