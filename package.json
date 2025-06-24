@@ -1,7 +1,7 @@
 {
   "private": true,
   "type": "module",
-  "script": {
+  "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
